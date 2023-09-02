@@ -10,6 +10,9 @@ const UpdateProduct =()=>{
     const params = useParams();
     const navigate = useNavigate();
 
+    const BASE_URL = "https://ecom-backend-mu.vercel.app/"
+    //const url = "http://localhost:5000/"
+
     useEffect(()=>{
         getProductDetails();
     },[]); 
@@ -32,7 +35,7 @@ const UpdateProduct =()=>{
         // }).catch((err)=>{
         //    console.log(err,"err in api call");
         // })
-         let result = await fetch(`http://localhost:5000/product/${params.id}`,{
+         let result = await fetch(BASE_URL+`product/${params.id}`,{
             headers:{
                 authorization:`bearer ${JSON.parse(localStorage.getItem("token"))}` 
               }
@@ -52,7 +55,7 @@ const UpdateProduct =()=>{
                 category: category,
                 company: company,
             }
-            axios.put(`http://localhost:5000/product/${params.id}`,data,{
+            axios.put(BASE_URL+`product/${params.id}`,data,{
                 headers:{
                     authorization:`bearer ${JSON.parse(localStorage.getItem("token"))}` 
                   }

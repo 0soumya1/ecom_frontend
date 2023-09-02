@@ -6,6 +6,9 @@ import toast, {Toaster} from "react-hot-toast"
 const ProductList = () => {
     const[products, setProducts]= useState([]);
 
+    const BASE_URL = "https://ecom-backend-mu.vercel.app/"
+    //const url = "http://localhost:5000/"
+
     useEffect(()=>{
          getProducts();
     },[]);
@@ -14,7 +17,7 @@ const ProductList = () => {
         // let result = await fetch("http://localhost:5000/products");
         // result = await result.json();
         // setProducts(result); 
-        axios.get("http://localhost:5000/products",{
+        axios.get(BASE_URL+"products",{
           headers:{
             authorization:`bearer ${JSON.parse(localStorage.getItem("token"))}` 
           }
@@ -32,7 +35,7 @@ const ProductList = () => {
       // console.log(products,"products");
 
     const deleteProduct =(id)=>{
-    axios.delete(`http://localhost:5000/product/${id}`,{
+    axios.delete(BASE_URL+`product/${id}`,{
       headers:{
         authorization:`bearer ${JSON.parse(localStorage.getItem("token"))}` 
       }
@@ -51,7 +54,7 @@ const ProductList = () => {
     const searchHandle =(event)=>{
       let key = event.target.value;
       if(key){
-        axios.get(`http://localhost:5000/search/${key}`,{
+        axios.get(BASE_URL+`search/${key}`,{
           headers:{
             authorization:`bearer ${JSON.parse(localStorage.getItem("token"))}` 
           }

@@ -6,6 +6,10 @@ const Login =()=>{
     const[email, setEmail]= useState("");
     const[password, setPassword]= useState("");
     const navigate = useNavigate();
+
+    const BASE_URL = "https://ecom-backend-mu.vercel.app/"
+    //const url = "http://localhost:5000/"
+
     useEffect(()=>{                                  // to prevent it from hacking
         const auth = localStorage.getItem("user");
         if(auth){
@@ -15,7 +19,7 @@ const Login =()=>{
 
     const handleLogin = async()=>{
         console.log (email, password);
-        let result = await fetch("http://localhost:5000/login",{
+        let result = await fetch(BASE_URL+"login",{
              method: "post",
              body: JSON.stringify({email, password}),
              headers:{"Content-Type": "application/json"}
