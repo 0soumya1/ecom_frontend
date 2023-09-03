@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate, useParams} from "react-router-dom"
 import axios from "axios";
+import toast, {Toaster} from "react-hot-toast"
 
 const UpdateProduct =()=>{
     const[name, setName] = useState("");
@@ -30,7 +31,7 @@ const UpdateProduct =()=>{
         //     if(res.data){
         //        setName(res.data)
         //     }else{
-        //         console.log("no record found")
+        //         toast.error("no record found")
         //     }
         // }).catch((err)=>{
         //    console.log(err,"err in api call");
@@ -64,7 +65,7 @@ const UpdateProduct =()=>{
                 if(res.data){
                     getProductDetails(res.data)
                 }else{
-                    console.log("no record found")
+                    toast.error("no record found")
                 }
             }).catch((err)=>{
                console.log(err,"err in api call");
@@ -92,6 +93,7 @@ const UpdateProduct =()=>{
             value={company} onChange={(e)=>setCompany(e.target.value)}/>
 
             <button onClick={updateProduct} className="appbutton">Update Product</button> 
+            <Toaster/>
         </div>
     )
 }
