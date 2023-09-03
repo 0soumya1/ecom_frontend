@@ -20,7 +20,7 @@
 }
 
 .footer{
-  position: absolute;
+  position: fixed;
   bottom: 0;
   text-align: center;
   width: 100%;
@@ -92,3 +92,11 @@
   border: 2px solid skyblue;
   padding-left: 20px;
 }
+
+/* .App{
+  font-size: 62.5%;
+} */
+
+/* @media (max-width: 887px){
+  
+} */
