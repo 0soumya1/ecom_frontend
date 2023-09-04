@@ -4,6 +4,10 @@ import Select from "react-select";
 import { BASE_URL } from "../Const";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import TextField from "@mui/material/TextField";
+// import "bootstrap/dist/css/bootstrap.min.css"
 
 const AddProduct = () => {
   const [name, setName] = useState("");
@@ -16,7 +20,7 @@ const AddProduct = () => {
     { value: 1, label: "Breakfast" },
     { value: 2, label: "Lunch" },
     { value: 3, label: "Snacks" },
-    { value: 4, label: "Dinner" }
+    { value: 4, label: "Dinner" },
   ];
 
   const handleCategoryChange = (e) => {
@@ -26,7 +30,7 @@ const AddProduct = () => {
 
   const addProduct = async () => {
     console.log(!name);
-    if (!name, !price, !category?.label) {
+    if ((!name, !price, !category?.label)) {
       setError(true);
       return false;
     }
@@ -37,14 +41,14 @@ const AddProduct = () => {
       name: name,
       price: price,
       category: category?.label,
-      userId: userId
+      userId: userId,
     };
 
     axios
       .post(BASE_URL + "add-product", data, {
         headers: {
-          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
-        }
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
       })
       .then((res) => {
         console.log(res, "response from add api");
@@ -61,44 +65,52 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="product">
-      <h1>Add Item</h1>
-      <input
-        type="text"
-        placeholder="Enter Name"
-        className="inputbox"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+    <div className="card2">
+      <div className="heading">Add Item</div>
+
+      <div style={{ height: "50px" }}>
+        <TextField
+          variant="outlined"
+          label="Enter Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <br />
       {error && !name && (
         <span className="invalid-input">Enter Valid Name</span>
       )}
-      <input
-        type="text"
-        placeholder="Enter Price"
-        className="inputbox"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      />
+
+      <div style={{ height: "50px" }}>
+        <TextField
+          variant="outlined"
+          label="Enter Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+      </div>
+      <br />
       {error && !price && (
         <span className="invalid-input">Enter Valid Price</span>
       )}
-      
-      <Select
-        type="text"
-        placeholder="Select Category"
-        className="inputbox"
-        value={category}
-        options={categoryOptions}
-        onChange={(e) => handleCategoryChange(e)}
-      />
+
+      <div className="select">
+        <Select
+          placeholder="Select Category"
+          value={category}
+          options={categoryOptions}
+          onChange={(e) => handleCategoryChange(e)}
+        />
+      </div>
+      <br />
       {error && !category && (
         <span className="invalid-input">Enter Valid Category</span>
       )}
 
-      <button onClick={addProduct} className="appbutton">
-        Add Item
-      </button>
+      <Button variant="contained" onClick={addProduct}>
+        <AddIcon />
+        Save
+      </Button>
     </div>
   );
 };

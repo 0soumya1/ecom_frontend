@@ -30,35 +30,6 @@ const Nav = () => {
           <Link to="/login">Login</Link>
         </>
       )}
-
-      {/* {auth ? (
-        <ul className="nav-ul li">
-          <li>
-            <Link to="/">Products</Link>
-          </li>
-          <li>
-            <Link to="/add">Add Product</Link>
-          </li>
-          <li>
-            <Link to="/update">Update Product</Link>
-          </li>
-          <li>
-            <Link onClick={logout} to="/signup">
-              Logout ({JSON.parse(auth).name}){" "}
-            </Link>
-          </li>
-        </ul>
-      ) : (
-        <ul className="nav-ul li nav-right">
-          <li>
-            <Link to="/signup">Sign Up</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </ul>
-      )} */}
-      
     </div>
   );
 };

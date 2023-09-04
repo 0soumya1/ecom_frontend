@@ -1,52 +1,78 @@
-import React,{useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../Const";
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import TextField from "@mui/material/TextField";
 
 const SignUp = () => {
-    const[name, setName]= useState('');
-    const[email, setEmail]= useState('');
-    const[password, setPassword]= useState('');
-    const navigate = useNavigate();
-     
-    const BASE_URL = "https://ecom-backend-mu.vercel.app/"
-    //const url = "http://localhost:5000/"
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-    useEffect(()=>{
-      const auth = localStorage.getItem("user");
-      if(auth){
-        navigate('/')
-      }
-    },[]);
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (auth) {
+      navigate("/");
+    }
+  }, []);
 
-    const collectData = async ()=>{
-        console.log(name,email,password);
+  const collectData = async () => {
+    console.log(name, email, password);
 
-        let result = await fetch(BASE_URL+"register",{
-           method: "post",
-           body: JSON.stringify({name,email,password}),
-           headers:{"Content-Type":"application/json"}
-        });
-        result = await result.json();
-        console.log(result);
-        localStorage.setItem("user",JSON.stringify(result.result));
-        localStorage.setItem("token",JSON.stringify(result.auth));
-        navigate("/")
-    };
+    let result = await fetch(BASE_URL + "register", {
+      method: "post",
+      body: JSON.stringify({ name, email, password }),
+      headers: { "Content-Type": "application/json" },
+    });
+    result = await result.json();
+    console.log(result);
+    localStorage.setItem("user", JSON.stringify(result.result));
+    localStorage.setItem("token", JSON.stringify(result.auth));
+    navigate("/");
+  };
 
   return (
-    <div className='register'>
-        <h1>Register</h1>
-        <input className='inputbox' type='text' placeholder='Enter Name'
-         value={name} onChange={(e)=>setName(e.target.value)}
-         />
-        <input className='inputbox' type='text' placeholder='Enter Email'
-         value={email} onChange={(e)=>setEmail(e.target.value)}
-         />
-        <input className='inputbox' type='password' placeholder='Enter Password'
-        value={password} onChange={(e)=>setPassword(e.target.value)}
+    <div className="card2">
+      <div className="heading">Register</div>
+
+      <div style={{ height: "50px" }}>
+        <TextField
+          variant="outlined"
+          label="Enter Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
-        <button onClick={collectData} className='appbutton' type='button'>SignUp</button>
+      </div>
+      <br />
+
+      <div style={{ height: "50px" }}>
+        <TextField
+          variant="outlined"
+          label="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <br />
+
+      <div style={{ height: "50px" }}>
+        <TextField
+          variant="outlined"
+          label="Enter Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <br />
+
+      <Button variant="contained" onClick={collectData}>
+        <AddIcon />
+        SignUp
+      </Button>
     </div>
-  )
-}
+  );
+};
 
 export default SignUp;

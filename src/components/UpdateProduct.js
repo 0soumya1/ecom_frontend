@@ -4,6 +4,9 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Select from "react-select";
 import { BASE_URL } from "../Const";
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import TextField from "@mui/material/TextField";
 
 const UpdateProduct = () => {
   const [name, setName] = useState("");
@@ -61,7 +64,7 @@ const UpdateProduct = () => {
     };
     let token = `bearer ${JSON.parse(localStorage.getItem("token"))}`;
     axios
-      .put(BASE_URL + `product/${params.id}`, data,{
+      .put(BASE_URL + `product/${params.id}`, data, {
         headers: { authorization: token },
       })
       .then((res) => {
@@ -79,35 +82,43 @@ const UpdateProduct = () => {
   };
 
   return (
-    <div className="product">
-      <h1>Update Item</h1>
-      <input
-        type="text"
-        placeholder="Enter Name"
-        className="inputbox"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+    <div className="card2">
+      <div className="heading">Update Item</div>
 
-      <input
-        type="text"
-        placeholder="Enter Price"
-        className="inputbox"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      />
+      <div style={{ height: "50px" }}>
+        <TextField
+          variant="outlined"
+          label="Enter Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <br />
 
-      <Select
-        placeholder="Select Category"
-        className="inputbox"
-        value={category}
-        options={categoryOptions}
-        onChange={(e) => handleCategoryChange(e)}
-      />
+      <div style={{ height: "50px" }}>
+        <TextField
+          variant="outlined"
+          label="Enter Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+      </div>
+      <br />
 
-      <button onClick={updateProduct} className="appbutton">
-        Update Item
-      </button>
+      <div className="select">
+        <Select
+          placeholder="Select Category"
+          value={category}
+          options={categoryOptions}
+          onChange={(e) => handleCategoryChange(e)}
+        />
+      </div>
+      <br />
+
+      <Button variant="contained" onClick={updateProduct} className="appbutton">
+        <AddIcon />
+       Save
+      </Button>
       <Toaster />
     </div>
   );
