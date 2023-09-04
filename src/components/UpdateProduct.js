@@ -17,7 +17,7 @@ const UpdateProduct = () => {
     { value: 1, label: "Breakfast" },
     { value: 2, label: "Lunch" },
     { value: 3, label: "Snacks" },
-    { value: 4, label: "Dinner" },
+    { value: 4, label: "Dinner" }
   ];
 
   const handleCategoryChange = (e) => {
@@ -95,14 +95,6 @@ const UpdateProduct = () => {
         options={categoryOptions}
         onChange={(e) => handleCategoryChange(e)}
       />
-
-      {/* <input
-        type="text"
-        placeholder="Enter Category"
-        className="inputbox"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-      /> */}
 
       <button onClick={updateProduct} className="appbutton">
         Update Item

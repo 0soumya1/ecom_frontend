@@ -36,18 +36,19 @@ html {
   margin-top: 50px;
 }
 
-/* .login {
-  margin-left: 30%;
-  font-size: small;
-  margin-top: 100px;
-} */
-
 .inputbox {
   display: block;
   margin: 25px;
   padding: 7px;
   width: 300px;
   border: 2px solid skyblue;
+}
+
+.invalid-input {
+  color: red;
+  margin-top: -20px;
+  display: block;
+  margin-left: 25px;
 }
 
 .appbutton {
@@ -68,13 +69,6 @@ html {
   margin-top: 3px;
   margin-left: 20px;
 } */
-
-.invalid-input {
-  color: red;
-  margin-top: -20px;
-  display: block;
-  margin-left: 25px;
-}
 
 /* .product-list {
   text-align: center;

@@ -14,7 +14,7 @@ const AddProduct = () => {
     { value: 1, label: "Breakfast" },
     { value: 2, label: "Lunch" },
     { value: 3, label: "Snacks" },
-    { value: 4, label: "Dinner" },
+    { value: 4, label: "Dinner" }
   ];
 
   const handleCategoryChange = (e) => {
