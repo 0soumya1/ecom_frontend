@@ -71,6 +71,7 @@ const UpdateProduct = () => {
         console.log(res, "response from api");
         if (res.data) {
           getProductDetails(res.data);
+          toast.success("Item Updated");
         } else {
           toast.error("no record found");
         }

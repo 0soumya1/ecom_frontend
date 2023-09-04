@@ -4,6 +4,8 @@ import { BASE_URL } from "../Const";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
+import toast,{ Toaster } from "react-hot-toast";
+
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -30,6 +32,7 @@ const SignUp = () => {
     console.log(result);
     localStorage.setItem("user", JSON.stringify(result.result));
     localStorage.setItem("token", JSON.stringify(result.auth));
+    toast.success("SignUp Successful");
     navigate("/");
   };
 
@@ -71,6 +74,7 @@ const SignUp = () => {
         <AddIcon />
         SignUp
       </Button>
+      <Toaster/>
     </div>
   );
 };

@@ -51,6 +51,7 @@ const ProductList = () => {
         console.log(resp, "response from api");
         if (resp.data) {
           getProducts(resp.data);
+          toast.success("Item Deleted")
         } else {
           toast.error("not deleted");
         }
@@ -140,7 +141,7 @@ const ProductList = () => {
           </table>
         </>
       ) : (
-        <LinearProgress />
+        <LinearProgress/>
       )}
 
       <Toaster />

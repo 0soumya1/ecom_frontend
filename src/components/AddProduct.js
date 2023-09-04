@@ -53,8 +53,7 @@ const AddProduct = () => {
       .then((res) => {
         console.log(res, "response from add api");
         if (res.data) {
-          toast.success("item added");
-          navigate("/");
+          toast.success("Item Added");
         } else {
           toast.error("not found");
         }
@@ -62,6 +61,7 @@ const AddProduct = () => {
       .catch((err) => {
         console.log(err, "err in add api call");
       });
+      navigate("/");   
   };
 
   return (
