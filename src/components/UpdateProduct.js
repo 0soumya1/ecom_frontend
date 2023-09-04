@@ -14,10 +14,10 @@ const UpdateProduct = () => {
   const navigate = useNavigate();
 
   const categoryOptions = [
-    { value: 1, label: "Breakfast" },
-    { value: 2, label: "Lunch" },
-    { value: 3, label: "Snacks" },
-    { value: 4, label: "Dinner" }
+    { value: "Breakfast", label: "Breakfast" },
+    { value: "Lunch", label: "Lunch" },
+    { value: "Snacks", label: "Snacks" },
+    { value: "Dinner", label: "Dinner" },
   ];
 
   const handleCategoryChange = (e) => {
@@ -31,29 +31,38 @@ const UpdateProduct = () => {
 
   const getProductDetails = async () => {
     console.log(params);
-    let result = await fetch(BASE_URL + `product/${params.id}`, {
-      headers: {
-        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-      },
-    });
-    result = await result.json();
-    setName(result.name);
-    setPrice(result.price);
-    setCategory(result.category);
+
+    let token = `bearer ${JSON.parse(localStorage.getItem("token"))}`;
+    axios
+      .get(BASE_URL + `product/${params.id}`, {
+        headers: { authorization: token },
+      })
+      .then((res) => {
+        if (res.data) {
+          console.log(res.data, "res in get item");
+          setName(res.data.name);
+          setPrice(res.data.price);
+          setCategory({ value: res.data.category, label: res.data.category });
+        } else {
+          toast.error("no record found");
+        }
+      })
+      .catch((err) => {
+        console.log(err, "err in api call");
+      });
   };
 
   const updateProduct = async () => {
-    console.log(name, price, category);
+    console.log(name, price, category?.label);
     const data = {
       name: name,
       price: price,
-      category: category,
+      category: category?.label,
     };
+    let token = `bearer ${JSON.parse(localStorage.getItem("token"))}`;
     axios
-      .put(BASE_URL + `product/${params.id}`, data, {
-        headers: {
-          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
+      .put(BASE_URL + `product/${params.id}`, data,{
+        headers: { authorization: token },
       })
       .then((res) => {
         console.log(res, "response from api");

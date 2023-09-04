@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { BASE_URL } from "../Const";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const AddProduct = () => {
   const [name, setName] = useState("");
@@ -24,22 +26,38 @@ const AddProduct = () => {
 
   const addProduct = async () => {
     console.log(!name);
-    if (!name || !price || !category) {
+    if (!name, !price, !category?.label) {
       setError(true);
       return false;
     }
+
     const userId = JSON.parse(localStorage.getItem("user"))._id;
-    let result = await fetch(BASE_URL + "add-product", {
-      method: "post",
-      body: JSON.stringify({ name, price, category, userId }),
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-      },
-    });
-    result = await result.json();
-    console.log(result);
-    navigate("/");
+
+    let data = {
+      name: name,
+      price: price,
+      category: category?.label,
+      userId: userId
+    };
+
+    axios
+      .post(BASE_URL + "add-product", data, {
+        headers: {
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
+        }
+      })
+      .then((res) => {
+        console.log(res, "response from add api");
+        if (res.data) {
+          toast.success("item added");
+          navigate("/");
+        } else {
+          toast.error("not found");
+        }
+      })
+      .catch((err) => {
+        console.log(err, "err in add api call");
+      });
   };
 
   return (
@@ -67,6 +85,7 @@ const AddProduct = () => {
       )}
       
       <Select
+        type="text"
         placeholder="Select Category"
         className="inputbox"
         value={category}
