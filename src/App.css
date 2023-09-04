@@ -70,7 +70,7 @@ html {
 }
 
 .table td, .table th{
-  padding: 2px 3px;
+  padding: 2px 4px;
   border: 1px solid #ddd;
   text-align: center;
 }
@@ -78,4 +78,31 @@ html {
 .table th{
   background-color: rgba(13, 13, 13, 0.568);
   color: #ffffff;
+}
+
+@media(max-width:360px){
+  .table{
+    font-size: smaller;
+  }
+  .icon{
+    font-size: x-small;
+  }
+}
+
+@media(max-width:328px){
+  .table{
+    font-size: x-small;
+  }
+  .icon{
+    font-size: x-small;
+  }
+}
+
+@media(max-width:292px){
+  .table{
+    font-size: xx-small;
+  }
+  .icon{
+    font-size: x-small;
+  }
 }
