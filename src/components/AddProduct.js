@@ -15,10 +15,10 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   const categoryOptions = [
-    { value: 1, label: "Breakfast" },
-    { value: 2, label: "Lunch" },
-    { value: 3, label: "Snacks" },
-    { value: 4, label: "Dinner" },
+    { value: "Breakfast", label: "Breakfast" },
+    { value: "Lunch", label: "Lunch" },
+    { value: "Snacks", label: "Snacks" },
+    { value: "Dinner", label: "Dinner" },
   ];
 
   const handleCategoryChange = (e) => {

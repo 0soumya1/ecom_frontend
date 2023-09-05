@@ -8,7 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import LinearProgress from "@mui/material/LinearProgress";
-import { BASE_URL } from "../Const";
+import { BASE_URL, headerData } from "../Const";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -21,12 +21,10 @@ const ProductList = () => {
   const getProducts = async () => {
     axios
       .get(BASE_URL + "products", {
-        headers: {
-          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
+        headers: headerData,
       })
       .then((resp) => {
-        console.log(resp, "response from api");
+        console.log( " getlist api");
         if (resp.data) {
           setProducts(resp.data);
         } else {
@@ -37,7 +35,6 @@ const ProductList = () => {
         console.log(err, "err in api call");
       });
   };
-  // console.log(products,"products");
 
   const deleteProduct = (id) => {
     axios

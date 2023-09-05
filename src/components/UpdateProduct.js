@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Select from "react-select";
-import { BASE_URL } from "../Const";
+import { BASE_URL, headerData } from "../Const";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
@@ -34,10 +34,9 @@ const UpdateProduct = () => {
   const getProductDetails = async () => {
     console.log(params);
 
-    let token = `bearer ${JSON.parse(localStorage.getItem("token"))}`;
     axios
       .get(BASE_URL + `product/${params.id}`, {
-        headers: { authorization: token },
+        headers: headerData,
       })
       .then((res) => {
         if (res.data) {
@@ -55,22 +54,21 @@ const UpdateProduct = () => {
   };
 
   const updateProduct = async () => {
-    console.log(name, price, category?.label);
     const data = {
       name: name,
       price: price,
       category: category?.label,
     };
-    let token = `bearer ${JSON.parse(localStorage.getItem("token"))}`;
     axios
       .put(BASE_URL + `product/${params.id}`, data, {
-        headers: { authorization: token },
+        headers: headerData,
       })
       .then((res) => {
         console.log(res, "response from api");
         if (res.data) {
-          getProductDetails(res.data);
+          // getProductDetails(res.data); why did you call this?
           toast.success("Item Updated");
+          navigate("/");
         } else {
           toast.error("no record found");
         }
@@ -78,7 +76,6 @@ const UpdateProduct = () => {
       .catch((err) => {
         console.log(err, "err in api call");
       });
-    navigate("/");
   };
 
   return (
@@ -87,11 +84,11 @@ const UpdateProduct = () => {
 
       <div>
         <TextField
-           size="small"
-           variant="outlined"
-           label="Name"
-           value={name}
-           onChange={(e) => setName(e.target.value)}
+          size="small"
+          variant="outlined"
+          label="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <br />
@@ -117,8 +114,8 @@ const UpdateProduct = () => {
       </div>
       <br />
 
-      <Button variant="contained" onClick={updateProduct} >
-       Save
+      <Button variant="contained" onClick={updateProduct}>
+        Save
       </Button>
     </div>
   );
