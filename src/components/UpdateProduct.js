@@ -86,27 +86,29 @@ const UpdateProduct = () => {
     <div className="card2">
       <div className="heading">Update Item</div>
 
-      <div style={{ height: "50px" }}>
+      <div>
         <TextField
-          variant="outlined"
-          label="Enter Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+           size="small"
+           variant="outlined"
+           label="Name"
+           value={name}
+           onChange={(e) => setName(e.target.value)}
         />
       </div>
       <br />
 
-      <div style={{ height: "50px" }}>
+      <div>
         <TextField
+          size="small"
           variant="outlined"
-          label="Enter Price"
+          label="Price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
       </div>
       <br />
 
-      <div className="select">
+      <div style={{ width: "222px", margin: "auto" }}>
         <Select
           placeholder="Select Category"
           value={category}
@@ -116,11 +118,9 @@ const UpdateProduct = () => {
       </div>
       <br />
 
-      <Button variant="contained" onClick={updateProduct} className="appbutton">
-        <AddIcon />
+      <Button variant="contained" onClick={updateProduct} >
        Save
       </Button>
-      <Toaster />
     </div>
   );
 };

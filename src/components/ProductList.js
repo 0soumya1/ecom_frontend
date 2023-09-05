@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from '@mui/icons-material/Edit';
 import EditSharpIcon from '@mui/icons-material/EditSharp';
 import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
@@ -23,8 +22,8 @@ const ProductList = () => {
     axios
       .get(BASE_URL + "products", {
         headers: {
-          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
+        }
       })
       .then((resp) => {
         console.log(resp, "response from api");
@@ -44,8 +43,8 @@ const ProductList = () => {
     axios
       .delete(BASE_URL + `product/${id}`, {
         headers: {
-          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
+        }
       })
       .then((resp) => {
         console.log(resp, "response from api");
@@ -67,10 +66,8 @@ const ProductList = () => {
       axios
         .get(BASE_URL + `search/${key}`, {
           headers: {
-            authorization: `bearer ${JSON.parse(
-              localStorage.getItem("token")
-            )}`,
-          },
+            authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
+          }
         })
         .then((resp) => {
           console.log(resp, "response from api");
@@ -124,16 +121,19 @@ const ProductList = () => {
             <tbody>
               {products.map((item, index) => (
                 <tr key={item._id}>
-                  <td>{item.name}</td>
+                  <td style={{ textTransform: "uppercase" }}>{item.name}</td>
                   <td>₹ {item.price}</td>
                   <td>{item.category}</td>
                   <td>
-                    <Link to={"/update/" + item._id}>
-                      <EditSharpIcon className="icon" />
-                    </Link>
-                    <Button onClick={() => deleteProduct(item._id)}>
-                      <DeleteIcon className="icon" />
-                    </Button>
+                    <EditSharpIcon
+                      className="icon"
+                      onClick={() => navigate("/update/" + item._id)}
+                    />
+
+                    <DeleteIcon
+                      className="icon"
+                      onClick={() => deleteProduct(item._id)}
+                    />
                   </td>
                 </tr>
               ))}
@@ -143,8 +143,6 @@ const ProductList = () => {
       ) : (
         <LinearProgress/>
       )}
-
-      <Toaster />
     </div>
   );
 };
