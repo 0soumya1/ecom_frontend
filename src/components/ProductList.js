@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditSharpIcon from '@mui/icons-material/EditSharp';
+import EditSharpIcon from "@mui/icons-material/EditSharp";
 import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -22,8 +22,8 @@ const ProductList = () => {
     axios
       .get(BASE_URL + "products", {
         headers: {
-          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
-        }
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
       })
       .then((resp) => {
         console.log(resp, "response from api");
@@ -43,8 +43,8 @@ const ProductList = () => {
     axios
       .delete(BASE_URL + `product/${id}`, {
         headers: {
-          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
-        }
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
       })
       .then((resp) => {
         console.log(resp, "response from api");
@@ -66,8 +66,10 @@ const ProductList = () => {
       axios
         .get(BASE_URL + `search/${key}`, {
           headers: {
-            authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`
-          }
+            authorization: `bearer ${JSON.parse(
+              localStorage.getItem("token")
+            )}`,
+          },
         })
         .then((resp) => {
           console.log(resp, "response from api");
@@ -88,26 +90,26 @@ const ProductList = () => {
   return (
     <div className="card2">
       <div className="heading">Food Items</div>
+
+      <div className="row1">
+        <div>
+          <TextField
+            variant="outlined"
+            label="Search"
+            size="small"
+            onChange={searchHandle}
+          />
+        </div>
+        <div>
+          <Button variant="contained" onClick={() => navigate("/add")}>
+            <AddIcon />
+            Add
+          </Button>
+        </div>
+      </div>
+      <br />
       {products.length > 0 ? (
         <>
-          <div className="row1">
-            <div>
-              <TextField
-                variant="outlined"
-                label="Search"
-                size="small"
-                onChange={searchHandle}
-              />
-            </div>
-            <div>
-              <Button variant="contained" onClick={() => navigate("/add")}>
-                <AddIcon />
-                Add
-              </Button>
-            </div>
-          </div>
-          <br />
-
           <table className="table">
             <thead>
               <tr>
