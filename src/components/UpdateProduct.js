@@ -120,7 +120,7 @@ const UpdateProduct = () => {
         <AddIcon />
        Save
       </Button>
-      <Toaster />
+   
     </div>
   );
 };

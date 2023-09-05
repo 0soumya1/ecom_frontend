@@ -40,39 +40,42 @@ const SignUp = () => {
     <div className="card2">
       <div className="heading">Register</div>
 
-      <div style={{ height: "50px" }}>
+      <div >
         <TextField
+         size="small"
           variant="outlined"
-          label="Enter Name"
+          label="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
       <br />
 
-      <div style={{ height: "50px" }}>
+      <div >
         <TextField
+         size="small"
           variant="outlined"
-          label="Enter Email"
+          label="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <br />
 
-      <div style={{ height: "50px" }}>
+      <div >
         <TextField
+         size="small"
           variant="outlined"
-          label="Enter Password"
+          type="password"
+          label="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <br />
 
-      <Button variant="contained" onClick={collectData}>
-        <AddIcon />
-        SignUp
+      <Button size="small" style={{width:"100px"}} variant="contained" onClick={collectData}>
+        save
       </Button>
       <Toaster/>
     </div>

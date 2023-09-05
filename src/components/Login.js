@@ -5,10 +5,13 @@ import { BASE_URL } from "../Const";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
+import LinearProgress from "@mui/material/LinearProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +23,7 @@ const Login = () => {
   }, []);
 
   const handleLogin = async () => {
+    setLoading(true);
     console.log(email, password);
     let result = await fetch(BASE_URL + "login", {
       method: "post",
@@ -30,9 +34,11 @@ const Login = () => {
     console.log(result);
     if (result.auth) {
       localStorage.setItem("user", JSON.stringify(result.user));
-      localStorage.setItem("token", JSON.stringify(result.auth));  
+      localStorage.setItem("token", JSON.stringify(result.auth));
+      setLoading(false);
       toast.success("Login Successful");
     } else {
+      setLoading(false);
       toast.error("please enter correct details");
     }
     navigate("/");
@@ -40,33 +46,37 @@ const Login = () => {
 
   return (
     <div className="card2">
-      <div className="heading">Login</div>
+      <div className="heading">SignIn</div>
 
-      <div style={{ height: "50px" }}>
+      <div>
         <TextField
+          size="small"
           variant="outlined"
-          label="Enter Email"
+          label="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <br />
 
-      <div style={{ height: "50px" }}>
+      <div>
         <TextField
+          size="small"
           variant="outlined"
-          label="Enter Password"
+          label="Password"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <br />
-
-      <Button variant="contained" onClick={handleLogin}>
-        <AddIcon />
-        Save
-      </Button>
-      <Toaster />
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <Button size="small" variant="contained" onClick={handleLogin}>
+          save
+        </Button>
+      )}
     </div>
   );
 };

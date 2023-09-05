@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from '@mui/icons-material/Edit';
-import EditSharpIcon from '@mui/icons-material/EditSharp';
+import EditIcon from "@mui/icons-material/Edit";
+import EditSharpIcon from "@mui/icons-material/EditSharp";
 import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -51,7 +51,7 @@ const ProductList = () => {
         console.log(resp, "response from api");
         if (resp.data) {
           getProducts(resp.data);
-          toast.success("Item Deleted")
+          toast.success("Item Deleted");
         } else {
           toast.error("not deleted");
         }
@@ -124,16 +124,19 @@ const ProductList = () => {
             <tbody>
               {products.map((item, index) => (
                 <tr key={item._id}>
-                  <td>{item.name}</td>
+                  <td style={{ textTransform: "uppercase" }}>{item.name}</td>
                   <td>₹ {item.price}</td>
                   <td>{item.category}</td>
                   <td>
-                    <Link to={"/update/" + item._id}>
-                      <EditSharpIcon className="icon" />
-                    </Link>
-                    <Button onClick={() => deleteProduct(item._id)}>
-                      <DeleteIcon className="icon" />
-                    </Button>
+                    <EditSharpIcon
+                      className="icon"
+                      onClick={() => navigate("/update/" + item._id)}
+                    />
+
+                    <DeleteIcon
+                      className="icon"
+                      onClick={() => deleteProduct(item._id)}
+                    />
                   </td>
                 </tr>
               ))}
@@ -141,10 +144,8 @@ const ProductList = () => {
           </table>
         </>
       ) : (
-        <LinearProgress/>
+        <LinearProgress />
       )}
-
-      <Toaster />
     </div>
   );
 };

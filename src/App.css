@@ -45,12 +45,16 @@ html {
 
 .heading {
   font-size: large;
-  margin: 10px;
+  margin: 15px;
+  padding: 5px;
 }
 
 .icon {
   font-size: 10px ;
   cursor: pointer;
+  color: rgb(3, 121, 218);
+  margin: 2px;
+  padding: 2px;
 }
 
 .select{
@@ -76,8 +80,8 @@ html {
 }
 
 .table th{
-  background-color: rgba(13, 13, 13, 0.568);
-  color: #ffffff;
+  background-color: rgba(143, 143, 143, 0.568);
+ 
 }
 
 @media(max-width:360px){

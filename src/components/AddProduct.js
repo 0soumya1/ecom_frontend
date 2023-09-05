@@ -7,7 +7,6 @@ import { toast } from "react-hot-toast";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
-// import "bootstrap/dist/css/bootstrap.min.css"
 
 const AddProduct = () => {
   const [name, setName] = useState("");
@@ -61,17 +60,18 @@ const AddProduct = () => {
       .catch((err) => {
         console.log(err, "err in add api call");
       });
-      navigate("/");   
+    navigate("/");
   };
 
   return (
     <div className="card2">
       <div className="heading">Add Item</div>
 
-      <div style={{ height: "50px" }}>
+      <div>
         <TextField
+          size="small"
           variant="outlined"
-          label="Enter Name"
+          label="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -81,10 +81,11 @@ const AddProduct = () => {
         <span className="invalid-input">Enter Valid Name</span>
       )}
 
-      <div style={{ height: "50px" }}>
+      <div>
         <TextField
+          size="small"
           variant="outlined"
-          label="Enter Price"
+          label="Price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
@@ -94,7 +95,7 @@ const AddProduct = () => {
         <span className="invalid-input">Enter Valid Price</span>
       )}
 
-      <div className="select">
+      <div style={{ width: "222px", margin: "auto" }}>
         <Select
           placeholder="Select Category"
           value={category}
@@ -102,13 +103,13 @@ const AddProduct = () => {
           onChange={(e) => handleCategoryChange(e)}
         />
       </div>
+
       <br />
       {error && !category && (
         <span className="invalid-input">Enter Valid Category</span>
       )}
 
       <Button variant="contained" onClick={addProduct}>
-        <AddIcon />
         Save
       </Button>
     </div>

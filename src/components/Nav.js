@@ -14,9 +14,9 @@ const Nav = () => {
     <div className="row1 card">
       <div className="row cursor" onClick={() => navigate("/")}>
         <ShoppingCartIcon />
-        E-Commerce
+        Admin panel
       </div>
-     
+
       {auth ? (
         <>
           <Link onClick={logout} to="/signup">
@@ -24,11 +24,11 @@ const Nav = () => {
           </Link>
         </>
       ) : (
-        <>
+        <div>
           {" "}
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/login">Login</Link>
-        </>
+          <Link to="/signup">SignUp</Link>&nbsp;
+          <Link to="/login">SignIn</Link>
+        </div>
       )}
     </div>
   );
