@@ -49,8 +49,8 @@ const Login = () => {
 
       <div>
         <TextField
-          variant="outlined"
           size="small"
+          variant="outlined"
           label="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

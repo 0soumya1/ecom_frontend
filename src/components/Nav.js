@@ -16,7 +16,7 @@ const Nav = () => {
         <ShoppingCartIcon />
         Admin Panel
       </div>
-     
+
       {auth ? (
         <>
           <Link onClick={logout} to="/signup">

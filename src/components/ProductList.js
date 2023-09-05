@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditSharpIcon from '@mui/icons-material/EditSharp';
@@ -50,7 +50,7 @@ const ProductList = () => {
         console.log(resp, "response from api");
         if (resp.data) {
           getProducts(resp.data);
-          toast.success("Item Deleted")
+          toast.success("Item Deleted");
         } else {
           toast.error("not deleted");
         }
@@ -141,7 +141,7 @@ const ProductList = () => {
           </table>
         </>
       ) : (
-        <LinearProgress/>
+        <LinearProgress />
       )}
     </div>
   );

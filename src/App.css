@@ -54,7 +54,7 @@ html {
   cursor: pointer;
   color: rgb(3, 121, 218);
   margin: 2px;
-  padding: 2px; 
+  padding: 2px;
 }
 
 *{
@@ -73,8 +73,7 @@ html {
 }
 
 .table th{
-  background-color:  rgba(143, 143, 143, 0.568);;
-  
+  background-color: rgba(143, 143, 143, 0.568);
 }
 
 @media(max-width:360px){

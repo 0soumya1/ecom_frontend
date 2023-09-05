@@ -5,7 +5,6 @@ import { BASE_URL } from "../Const";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
 
 const AddProduct = () => {
@@ -60,7 +59,7 @@ const AddProduct = () => {
       .catch((err) => {
         console.log(err, "err in add api call");
       });
-      navigate("/");   
+    navigate("/");
   };
 
   return (
@@ -103,6 +102,7 @@ const AddProduct = () => {
           onChange={(e) => handleCategoryChange(e)}
         />
       </div>
+
       <br />
       {error && !category?.label && (
         <span className="invalid-input" style={{marginLeft:"-60px"}}>Enter Valid Category</span>

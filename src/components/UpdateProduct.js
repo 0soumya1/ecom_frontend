@@ -5,7 +5,6 @@ import toast, { Toaster } from "react-hot-toast";
 import Select from "react-select";
 import { BASE_URL } from "../Const";
 import { Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
 
 const UpdateProduct = () => {
