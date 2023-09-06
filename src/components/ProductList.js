@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import  { toast } from "react-hot-toast";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditSharpIcon from "@mui/icons-material/EditSharp";
 import AddIcon from "@mui/icons-material/Add";
@@ -39,9 +39,7 @@ const ProductList = () => {
   const deleteProduct = (id) => {
     axios
       .delete(BASE_URL + `product/${id}`, {
-        headers: {
-          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
+        headers: headerData,
       })
       .then((resp) => {
         console.log(resp, "response from api");
@@ -62,11 +60,7 @@ const ProductList = () => {
     if (key) {
       axios
         .get(BASE_URL + `search/${key}`, {
-          headers: {
-            authorization: `bearer ${JSON.parse(
-              localStorage.getItem("token")
-            )}`,
-          },
+          headers: headerData,
         })
         .then((resp) => {
           console.log(resp, "response from api");

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import { BASE_URL } from "../Const";
+import { BASE_URL, headerData } from "../Const";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Button } from "@mui/material";
@@ -44,9 +44,7 @@ const AddProduct = () => {
 
     axios
       .post(BASE_URL + "add-product", data, {
-        headers: {
-          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
+        headers: headerData,
       })
       .then((res) => {
         console.log(res, "response from add api");
@@ -68,11 +66,11 @@ const AddProduct = () => {
 
       <div>
         <TextField
-           size="small"
-           variant="outlined"
-           label="Name"
-           value={name}
-           onChange={(e) => setName(e.target.value)}
+          size="small"
+          variant="outlined"
+          label="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <br />
@@ -105,7 +103,9 @@ const AddProduct = () => {
 
       <br />
       {error && !category?.label && (
-        <span className="invalid-input" style={{marginLeft:"-60px"}}>Enter Valid Category</span>
+        <span className="invalid-input" style={{ marginLeft: "-60px" }}>
+          Enter Valid Category
+        </span>
       )}
 
       <Button variant="contained" onClick={addProduct}>

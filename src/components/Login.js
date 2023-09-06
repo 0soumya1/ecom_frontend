@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import {toast} from "react-hot-toast";
 import { BASE_URL } from "../Const";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import LinearProgress from "@mui/material/LinearProgress";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Login = () => {
@@ -76,7 +75,6 @@ const Login = () => {
           Save
         </Button>
       )}
-     
     </div>
   );
 };

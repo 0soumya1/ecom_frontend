@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Const";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import toast,{ Toaster } from "react-hot-toast";
-
+import {toast} from "react-hot-toast";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +22,12 @@ const SignUp = () => {
   const collectData = async () => {
     console.log(name, email, password);
 
+    console.log(!name);
+    if ((!name, !email, !password)) {
+      setError(true);
+      return false;
+    }
+
     let result = await fetch(BASE_URL + "register", {
       method: "post",
       body: JSON.stringify({ name, email, password }),
@@ -29,9 +35,13 @@ const SignUp = () => {
     });
     result = await result.json();
     console.log(result);
-    localStorage.setItem("user", JSON.stringify(result.result));
-    localStorage.setItem("token", JSON.stringify(result.auth));
-    toast.success("SignUp Successful");
+    if (result.auth) {
+      localStorage.setItem("user", JSON.stringify(result.result));
+      localStorage.setItem("token", JSON.stringify(result.auth));
+      toast.success("SignUp Successful");
+    } else {
+      toast.error("please enter correct details");
+    }
     navigate("/");
   };
 
@@ -39,18 +49,21 @@ const SignUp = () => {
     <div className="card2">
       <div className="heading">Register</div>
 
-      <div >
+      <div>
         <TextField
-         size="small"
-         variant="outlined"
-         label="Name"
+          size="small"
+          variant="outlined"
+          label="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
       <br />
+      {error && !name && (
+        <span className="invalid-input">Enter Valid Name</span>
+      )}
 
-      <div >
+      <div>
         <TextField
           variant="outlined"
           size="small"
@@ -60,8 +73,10 @@ const SignUp = () => {
         />
       </div>
       <br />
-
-      <div >
+      {error && !email && (
+        <span className="invalid-input">Enter Valid Email</span>
+      )}
+      <div>
         <TextField
           variant="outlined"
           size="small"
@@ -72,11 +87,20 @@ const SignUp = () => {
         />
       </div>
       <br />
+      {error && !password && (
+        <span className="invalid-input" style={{ marginLeft: "-60px" }}>
+          Enter Valid Password
+        </span>
+      )}
 
-      <Button size="small" style={{width:"100px"}} variant="contained" onClick={collectData}>
+      <Button
+        size="small"
+        style={{ width: "100px" }}
+        variant="contained"
+        onClick={collectData}
+      >
         SignUp
       </Button>
-      <Toaster/>
     </div>
   );
 };

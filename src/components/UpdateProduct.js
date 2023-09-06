@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import Select from "react-select";
 import { BASE_URL, headerData } from "../Const";
 import { Button } from "@mui/material";
@@ -66,7 +66,6 @@ const UpdateProduct = () => {
       .then((res) => {
         console.log(res, "response from api");
         if (res.data) {
-          // getProductDetails(res.data); why did you call this?
           toast.success("Item Updated");
           navigate("/");
         } else {
