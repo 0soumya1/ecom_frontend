@@ -6,8 +6,11 @@ import Select from "react-select";
 import { BASE_URL, headerData } from "../Const";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { useDispatch } from "react-redux";
+import { updateItem } from "../redux/RootActions";
 
 const UpdateProduct = () => {
+  const dispatch = useDispatch()
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -53,12 +56,15 @@ const UpdateProduct = () => {
       });
   };
 
-  const updateProduct = async () => {
+  const updateProduct = async (id) => {
     const data = {
       name: name,
       price: price,
       category: category?.label,
     };
+
+  //  dispatch(updateItem(data,id,navigate))
+
     axios
       .put(BASE_URL + `product/${params.id}`, data, {
         headers: headerData,
@@ -113,7 +119,7 @@ const UpdateProduct = () => {
       </div>
       <br />
 
-      <Button variant="contained" onClick={updateProduct}>
+      <Button variant="contained" onClick={() => updateProduct()}>
         Save
       </Button>
     </div>

@@ -13,7 +13,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // to prevent it from hacking
     const auth = localStorage.getItem("user");
     if (auth) {
       navigate("/");
@@ -71,7 +70,7 @@ const Login = () => {
       {loading ? (
         <CircularProgress />
       ) : (
-        <Button size="small" variant="contained" onClick={handleLogin}>
+        <Button size="small" variant="contained" onClick={() => handleLogin()}>
           Save
         </Button>
       )}

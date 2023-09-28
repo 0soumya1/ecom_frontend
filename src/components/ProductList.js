@@ -11,84 +11,103 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { BASE_URL, headerData } from "../Const";
 import { useDispatch, useSelector } from "react-redux";
 import { getItemList } from "../redux/Items/Action";
+import { deleteItem } from "../redux/Items/Action";
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [products, setProducts] = useState([]);
+  const [itemList1, setItemList1] = useState([]);
+  const [itemList2, setItemList2] = useState([]);
+
   const itemList = useSelector((state) => state.itemReducer.itemList);
   console.log(itemList, "itemlist");
+
   useEffect(() => {
-    // getProducts();
     dispatch(getItemList());
   }, []);
 
+  useEffect(() => {
+    setItemList1(itemList);
+    setItemList2(itemList);
+  }, [itemList]);
 
+  const deleteProduct =(id)=>{
+    dispatch(deleteItem(id));
+  }
+    
 
-  const getProducts = async () => {
-    axios
-      .get(BASE_URL + "products", {
-        headers: headerData,
-      })
-      .then((resp) => {
-        console.log(" getlist api");
-        if (resp.data) {
-          setProducts(resp.data);
-        } else {
-          toast.error("not found");
-        }
-      })
-      .catch((err) => {
-        console.log(err, "err in api call");
-      });
+  // const getProducts = async () => {
+  //   axios
+  //     .get(BASE_URL + "products", {
+  //       headers: headerData,
+  //     })
+  //     .then((resp) => {
+  //       console.log(" getlist api");
+  //       if (resp.data) {
+  //         setProducts(resp.data);
+  //       } else {
+  //         toast.error("not found");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err, "err in api call");
+  //     });
+  // };
+
+  // const deleteProduct = (id) => {
+  //   axios
+  //     .delete(BASE_URL + `product/${id}`, {
+  //       headers: headerData,
+  //     })
+  //     .then((resp) => {
+  //       console.log(resp, "response from api");
+  //       if (resp.data) {
+  //         // getProducts(resp.data);
+  //         toast.success("Item Deleted");
+  //       } else {
+  //         toast.error("not deleted");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err, "err in api call");
+  //     });
+  // };
+
+  // const searchHandle = (e) => {
+  //   let key = e.target.value;
+  //   if (key) {
+  //     axios
+  //       .get(BASE_URL + `search/${key}`, {
+  //         headers: headerData,
+  //       })
+  //       .then((resp) => {
+  //         console.log(resp, "response from api");
+  //         if (resp.data) {
+  //           setProducts(resp.data);
+  //         } else {
+  //           toast.error("not found");
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err, "err in api call");
+  //       });
+  //   } else {
+  //     // getProducts();
+  //   }
+  // };
+
+  const handleSearch = (key) => {
+    let search = key.toLowerCase();
+    const result = itemList2.filter((a) => {
+      return (
+        a?.name?.toLowerCase().match(search) ||
+        a?.price?.toString().match(search) ||
+        a?.category?.toLowerCase().match(search)
+      );
+    });
+    setItemList1(result);
   };
-
-  const deleteProduct = (id) => {
-    axios
-      .delete(BASE_URL + `product/${id}`, {
-        headers: headerData,
-      })
-      .then((resp) => {
-        console.log(resp, "response from api");
-        if (resp.data) {
-          getProducts(resp.data);
-          toast.success("Item Deleted");
-        } else {
-          toast.error("not deleted");
-        }
-      })
-      .catch((err) => {
-        console.log(err, "err in api call");
-      });
-  };
-
-  const searchHandle = (e) => {
-    let key = e.target.value;
-    if (key) {
-      axios
-        .get(BASE_URL + `search/${key}`, {
-          headers: headerData,
-        })
-        .then((resp) => {
-          console.log(resp, "response from api");
-          if (resp.data) {
-            setProducts(resp.data);
-          } else {
-            toast.error("not found");
-          }
-        })
-        .catch((err) => {
-          console.log(err, "err in api call");
-        });
-    } else {
-      // getProducts();
-    }
-  };
-
-const handleSearch=(key)=>{
-
-}
 
   return (
     <div className="card2">
@@ -100,7 +119,7 @@ const handleSearch=(key)=>{
             variant="outlined"
             label="Search"
             size="small"
-            // onChange={(e)=>searchHandle(e)}
+            onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
         <div>
@@ -111,7 +130,7 @@ const handleSearch=(key)=>{
         </div>
       </div>
       <br />
-      {itemList.length > 0 ? (
+      {itemList1.length > 0 ? (
         <>
           <table className="table">
             <thead>
@@ -124,8 +143,7 @@ const handleSearch=(key)=>{
             </thead>
 
             <tbody>
-              {/* {products.map((item, index) => ( */}
-              {itemList.map((item, index) => (
+              {itemList1.map((item, index) => (
                 <tr key={item._id}>
                   <td style={{ textTransform: "uppercase" }}>{item.name}</td>
                   <td>₹ {item.price}</td>

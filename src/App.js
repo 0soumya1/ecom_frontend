@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import Nav from "./components/Nav";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "./components/SignUp";
@@ -8,8 +9,6 @@ import AddProduct from "./components/AddProduct";
 import ProductList from "./components/ProductList";
 import UpdateProduct from "./components/UpdateProduct";
 import { Toaster } from "react-hot-toast";
-
-import React, { useEffect, useState } from "react";
 
 const App = () => {
   return (

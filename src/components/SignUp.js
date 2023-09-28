@@ -4,13 +4,19 @@ import { BASE_URL } from "../Const";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import {toast} from "react-hot-toast";
+import { useDispatch, useSelector} from "react-redux";
+import { signUP } from "../redux/Users/Action";
 
 const SignUp = () => {
+  const dispatch=useDispatch()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+
+  const userList = useSelector((state) => state.userReducer.userList);
+  console.log(userList, "userlist");
 
   useEffect(() => {
     const auth = localStorage.getItem("user");
@@ -28,21 +34,29 @@ const SignUp = () => {
       return false;
     }
 
-    let result = await fetch(BASE_URL + "register", {
-      method: "post",
-      body: JSON.stringify({ name, email, password }),
-      headers: { "Content-Type": "application/json" },
-    });
-    result = await result.json();
-    console.log(result);
-    if (result.auth) {
-      localStorage.setItem("user", JSON.stringify(result.result));
-      localStorage.setItem("token", JSON.stringify(result.auth));
-      toast.success("SignUp Successful");
-      navigate("/");
-    } else {
-      toast.error("please enter correct details");
-    }
+    let data = {
+      name: name,
+      email: email,
+      password: password
+    };
+
+    dispatch(signUP(data,navigate))
+
+    // let result = await fetch(BASE_URL + "register", {
+    //   method: "post",
+    //   body: JSON.stringify({ name, email, password }),
+    //   headers: { "Content-Type": "application/json" },
+    // });
+    // result = await result.json();
+    // console.log(result);
+    // if (result.auth) {
+    //   localStorage.setItem("user", JSON.stringify(result.result));
+    //   localStorage.setItem("token", JSON.stringify(result.auth));
+    //   toast.success("SignUp Successful");
+    //   navigate("/");
+    // } else {
+    //   toast.error("please enter correct details");
+    // }
   };
 
   return (

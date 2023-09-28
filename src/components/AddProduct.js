@@ -8,8 +8,9 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/Items/Action";
+
 const AddProduct = () => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -112,7 +113,7 @@ const AddProduct = () => {
         </span>
       )}
 
-      <Button variant="contained" onClick={addProduct}>
+      <Button variant="contained" onClick={() => addProduct()}>
         Save
       </Button>
     </div>
