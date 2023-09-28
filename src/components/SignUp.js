@@ -16,7 +16,6 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const userList = useSelector((state) => state.userReducer.userList);
-  console.log(userList, "userlist");
 
   useEffect(() => {
     const auth = localStorage.getItem("user");
@@ -26,9 +25,6 @@ const SignUp = () => {
   }, []);
 
   const collectData = async () => {
-    console.log(name, email, password);
-
-    console.log(!name);
     if ((!name, !email, !password)) {
       setError(true);
       return false;
@@ -42,21 +38,6 @@ const SignUp = () => {
 
     dispatch(signUP(data,navigate))
 
-    // let result = await fetch(BASE_URL + "register", {
-    //   method: "post",
-    //   body: JSON.stringify({ name, email, password }),
-    //   headers: { "Content-Type": "application/json" },
-    // });
-    // result = await result.json();
-    // console.log(result);
-    // if (result.auth) {
-    //   localStorage.setItem("user", JSON.stringify(result.result));
-    //   localStorage.setItem("token", JSON.stringify(result.auth));
-    //   toast.success("SignUp Successful");
-    //   navigate("/");
-    // } else {
-    //   toast.error("please enter correct details");
-    // }
   };
 
   return (

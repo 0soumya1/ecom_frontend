@@ -21,7 +21,6 @@ const Login = () => {
 
   const handleLogin = async () => {
     setLoading(true);
-    console.log(email, password);
     let result = await fetch(BASE_URL + "login", {
       method: "post",
       body: JSON.stringify({ email, password }),
@@ -34,7 +33,9 @@ const Login = () => {
       localStorage.setItem("token", JSON.stringify(result.auth));
       setLoading(false);
       toast.success("Login Successful");
-      navigate("/");
+      // navigate("/");
+      window.location.reload("/")
+
     } else {
       setLoading(false);
       toast.error("please enter correct details");

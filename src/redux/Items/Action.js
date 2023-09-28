@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL} from "../../Const";
+import { BASE_URL } from "../../Const";
 import { toast } from "react-hot-toast";
 
 export const AT_ITEM_LIST = "AT_ITEM_LIST";
@@ -7,12 +7,11 @@ export const AT_ADD_ITEM = "AT_ADD_ITEM";
 export const AT_DELETE_ITEM = "AT_DELETE_ITEM";
 export const AT_UPDATE_ITEM = "AT_UPDATE_ITEM";
 
-export const headerData = {
-  authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+const headerData = {
+  authorization: "bearer " + JSON.parse(localStorage.getItem("token")),
 };
 
 export const getItemList = () => async (dispatch) => {
-  console.log("redux getitem processing");
   axios
     .get(BASE_URL + "products", {
       headers: headerData,
@@ -33,18 +32,16 @@ export const getItemList = () => async (dispatch) => {
 };
 
 export const addItem = (data, navigate) => async (dispatch) => {
-  console.log("redux additem processing");
-
   axios
     .post(BASE_URL + "add-product", data, {
       headers: headerData,
     })
     .then((res) => {
-      console.log(res?.data, "res?.data");
       dispatch({
         type: AT_ADD_ITEM,
         payload: res?.data,
       });
+      toast.success("Item Added");
       navigate("/");
     })
     .catch((err) => {
@@ -58,15 +55,14 @@ export const deleteItem = (id) => async (dispatch) => {
       headers: headerData,
     })
     .then((res) => {
-      console.log(res?.data, "res?.data");
-      if(res.data){
+      if (res?.data?.deletedCount) {
         dispatch({
           type: AT_DELETE_ITEM,
           payload: res?.data,
         });
-        getItemList();
+        dispatch(getItemList());
         toast.success("Item Deleted");
-      }else{
+      } else {
         toast.error("not deleted");
       }
     })
@@ -76,7 +72,6 @@ export const deleteItem = (id) => async (dispatch) => {
 };
 
 export const updateItem = (data, navigate, params) => async (dispatch) => {
-  console.log("redux updateitem processing");
   axios
     .put(BASE_URL + `product/${params.id}`, data, {
       headers: headerData,

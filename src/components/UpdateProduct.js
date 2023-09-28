@@ -26,7 +26,6 @@ const UpdateProduct = () => {
   ];
 
   const handleCategoryChange = (e) => {
-    console.log(e, "e");
     setCategory(e);
   };
 

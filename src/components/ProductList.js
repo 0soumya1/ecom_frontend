@@ -21,7 +21,6 @@ const ProductList = () => {
   const [itemList2, setItemList2] = useState([]);
 
   const itemList = useSelector((state) => state.itemReducer.itemList);
-  console.log(itemList, "itemlist");
 
   useEffect(() => {
     dispatch(getItemList());
@@ -32,70 +31,9 @@ const ProductList = () => {
     setItemList2(itemList);
   }, [itemList]);
 
-  const deleteProduct =(id)=>{
+  const deleteProduct = (id) => {
     dispatch(deleteItem(id));
-  }
-    
-
-  // const getProducts = async () => {
-  //   axios
-  //     .get(BASE_URL + "products", {
-  //       headers: headerData,
-  //     })
-  //     .then((resp) => {
-  //       console.log(" getlist api");
-  //       if (resp.data) {
-  //         setProducts(resp.data);
-  //       } else {
-  //         toast.error("not found");
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err, "err in api call");
-  //     });
-  // };
-
-  // const deleteProduct = (id) => {
-  //   axios
-  //     .delete(BASE_URL + `product/${id}`, {
-  //       headers: headerData,
-  //     })
-  //     .then((resp) => {
-  //       console.log(resp, "response from api");
-  //       if (resp.data) {
-  //         // getProducts(resp.data);
-  //         toast.success("Item Deleted");
-  //       } else {
-  //         toast.error("not deleted");
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err, "err in api call");
-  //     });
-  // };
-
-  // const searchHandle = (e) => {
-  //   let key = e.target.value;
-  //   if (key) {
-  //     axios
-  //       .get(BASE_URL + `search/${key}`, {
-  //         headers: headerData,
-  //       })
-  //       .then((resp) => {
-  //         console.log(resp, "response from api");
-  //         if (resp.data) {
-  //           setProducts(resp.data);
-  //         } else {
-  //           toast.error("not found");
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err, "err in api call");
-  //       });
-  //   } else {
-  //     // getProducts();
-  //   }
-  // };
+  };
 
   const handleSearch = (key) => {
     let search = key.toLowerCase();

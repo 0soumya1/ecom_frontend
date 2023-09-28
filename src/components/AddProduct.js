@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../redux/Items/Action";
 
 const AddProduct = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -25,12 +25,10 @@ const AddProduct = () => {
   ];
 
   const handleCategoryChange = (e) => {
-    console.log(e, "e");
     setCategory(e);
   };
 
   const addProduct = async () => {
-    console.log(!name);
     if ((!name, !price, !category?.label)) {
       setError(true);
       return false;
@@ -45,24 +43,7 @@ const AddProduct = () => {
       userId: userId,
     };
 
-    dispatch(addItem(data,navigate))
-
-    // axios
-    //   .post(BASE_URL + "add-product", data, {
-    //     headers: headerData,
-    //   })
-    //   .then((res) => {
-    //     console.log(res, "response from add api");
-    //     if (res.data) {
-    //       toast.success("Item Added");
-    //     } else {
-    //       toast.error("not found");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err, "err in add api call");
-    //   });
-    // navigate("/");
+    dispatch(addItem(data, navigate));
   };
 
   return (
