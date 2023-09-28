@@ -1,4 +1,4 @@
-import {AT_ITEM_LIST, AT_DELETE_ITEM, AT_ADD_ITEM } from "./Action";
+import { AT_ITEM_LIST, AT_DELETE_ITEM, AT_ADD_ITEM } from "./Action";
 const initialState = {
   itemList: [],
 };
@@ -6,33 +6,26 @@ const initialState = {
 const itemReducer = (state = initialState, action) => {
   switch (action.type) {
     case AT_ITEM_LIST:
-      console.log("AT_ITEM_LIST")
       state = {
         ...state,
         itemList: action.payload,
       };
       break;
 
-    case AT_ADD_ITEM:
-      console.log("AT_ADD_ITEM")
-      state = {
-        ...state,
-        itemList: action.payload,
-      };
-      break;
+    // case AT_ADD_ITEM:
+    //   state = {
+    //     ...state,
+    //   };
+    //   break;
 
-    case AT_DELETE_ITEM:
-      console.log("AT_DELETE_ITEM")
-      state = {
-        ...state,
-        itemList: action.payload,
-      };
-      break;
-
-
+    // case AT_DELETE_ITEM:
+    //   state = {
+    //     ...state,
+    //   };
+    //   break;
 
     default:
-      console.log("default")
+      console.log("default in item reducer");
       state = { ...state };
       break;
   }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import  { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditSharpIcon from "@mui/icons-material/EditSharp";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,14 +9,22 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import LinearProgress from "@mui/material/LinearProgress";
 import { BASE_URL, headerData } from "../Const";
+import { useDispatch, useSelector } from "react-redux";
+import { getItemList } from "../redux/Items/Action";
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [products, setProducts] = useState([]);
+  const itemList = useSelector((state) => state.itemReducer.itemList);
+  console.log(itemList, "itemlist");
   useEffect(() => {
-    getProducts();
+    // getProducts();
+    dispatch(getItemList());
   }, []);
+
+
 
   const getProducts = async () => {
     axios
@@ -24,7 +32,7 @@ const ProductList = () => {
         headers: headerData,
       })
       .then((resp) => {
-        console.log( " getlist api");
+        console.log(" getlist api");
         if (resp.data) {
           setProducts(resp.data);
         } else {
@@ -55,8 +63,8 @@ const ProductList = () => {
       });
   };
 
-  const searchHandle = (event) => {
-    let key = event.target.value;
+  const searchHandle = (e) => {
+    let key = e.target.value;
     if (key) {
       axios
         .get(BASE_URL + `search/${key}`, {
@@ -74,9 +82,13 @@ const ProductList = () => {
           console.log(err, "err in api call");
         });
     } else {
-      getProducts();
+      // getProducts();
     }
   };
+
+const handleSearch=(key)=>{
+
+}
 
   return (
     <div className="card2">
@@ -88,7 +100,7 @@ const ProductList = () => {
             variant="outlined"
             label="Search"
             size="small"
-            onChange={searchHandle}
+            // onChange={(e)=>searchHandle(e)}
           />
         </div>
         <div>
@@ -99,7 +111,7 @@ const ProductList = () => {
         </div>
       </div>
       <br />
-      {products.length > 0 ? (
+      {itemList.length > 0 ? (
         <>
           <table className="table">
             <thead>
@@ -112,7 +124,8 @@ const ProductList = () => {
             </thead>
 
             <tbody>
-              {products.map((item, index) => (
+              {/* {products.map((item, index) => ( */}
+              {itemList.map((item, index) => (
                 <tr key={item._id}>
                   <td style={{ textTransform: "uppercase" }}>{item.name}</td>
                   <td>₹ {item.price}</td>

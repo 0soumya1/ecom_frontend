@@ -35,11 +35,11 @@ const Login = () => {
       localStorage.setItem("token", JSON.stringify(result.auth));
       setLoading(false);
       toast.success("Login Successful");
+      navigate("/");
     } else {
       setLoading(false);
       toast.error("please enter correct details");
     }
-    navigate("/");
   };
 
   return (

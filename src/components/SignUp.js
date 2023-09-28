@@ -39,10 +39,10 @@ const SignUp = () => {
       localStorage.setItem("user", JSON.stringify(result.result));
       localStorage.setItem("token", JSON.stringify(result.auth));
       toast.success("SignUp Successful");
+      navigate("/");
     } else {
       toast.error("please enter correct details");
     }
-    navigate("/");
   };
 
   return (
@@ -97,7 +97,7 @@ const SignUp = () => {
         size="small"
         style={{ width: "100px" }}
         variant="contained"
-        onClick={collectData}
+        onClick={()=>collectData()}
       >
         SignUp
       </Button>
