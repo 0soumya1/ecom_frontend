@@ -13,7 +13,6 @@ const userReducer = (state = initialState, action) => {
       break;
 
     default:
-      console.log("default in user reducer");
       state = { ...state };
       break;
   }

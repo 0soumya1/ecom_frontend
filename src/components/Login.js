@@ -5,8 +5,11 @@ import { BASE_URL } from "../Const";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../redux/RootActions";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,6 +25,14 @@ const Login = () => {
   const handleLogin = async () => {
     setLoading(true);
     console.log(email, password);
+
+    let data = {
+      email: email,
+      password: password
+    };
+
+   // dispatch(loginUser(data,navigate))
+
     let result = await fetch(BASE_URL + "login", {
       method: "post",
       body: JSON.stringify({ email, password }),
@@ -34,7 +45,8 @@ const Login = () => {
       localStorage.setItem("token", JSON.stringify(result.auth));
       setLoading(false);
       toast.success("Login Successful");
-      navigate("/");
+      //navigate("/");
+      window.location.reload("/")
     } else {
       setLoading(false);
       toast.error("please enter correct details");
