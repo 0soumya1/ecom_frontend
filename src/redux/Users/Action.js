@@ -35,8 +35,8 @@ export const signUP = (data) => async (dispatch) => {
       .then((res) => {
         if (res?.data?.auth) {
           console.log(res?.data , "data");
-          // localStorage.setItem("user", JSON.stringify(res?.data?.user));
-          // localStorage.setItem("token", JSON.stringify(res?.data?.auth));
+          localStorage.setItem("user", JSON.stringify(res?.data?.user));
+          localStorage.setItem("token", JSON.stringify(res?.data?.auth));
           dispatch({
             type: AT_LOGIN,
             payload: res?.data,
