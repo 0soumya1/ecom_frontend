@@ -12,6 +12,13 @@ const userReducer = (state = initialState, action) => {
       };
       break;
 
+    case AT_LOGIN:
+      state = {
+        ...state,
+        userList: action.payload,
+      };
+      break;
+
     default:
       state = { ...state };
       break;

@@ -26,7 +26,6 @@ const UpdateProduct = () => {
   ];
 
   const handleCategoryChange = (e) => {
-    console.log(e, "e");
     setCategory(e);
   };
 
@@ -102,6 +101,7 @@ const UpdateProduct = () => {
         <TextField
           size="small"
           variant="outlined"
+          type="number"
           label="Price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}

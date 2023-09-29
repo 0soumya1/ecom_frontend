@@ -12,20 +12,19 @@ const itemReducer = (state = initialState, action) => {
       };
       break;
 
-    // case AT_ADD_ITEM:
-    //   state = {
-    //     ...state,
-    //   };
-    //   break;
+    case AT_ADD_ITEM:
+      state = {
+        ...state,
+      };
+      break;
 
-    // case AT_DELETE_ITEM:
-    //   state = {
-    //     ...state,
-    //   };
-    //   break;
+    case AT_DELETE_ITEM:
+      state = {
+        ...state,
+      };
+      break;
 
     default:
-      console.log("default in item reducer");
       state = { ...state };
       break;
   }

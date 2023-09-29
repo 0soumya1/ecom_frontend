@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import { BASE_URL, headerData } from "../Const";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/Items/Action";
 
 const AddProduct = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -25,12 +22,10 @@ const AddProduct = () => {
   ];
 
   const handleCategoryChange = (e) => {
-    console.log(e, "e");
     setCategory(e);
   };
 
   const addProduct = async () => {
-    console.log(!name);
     if ((!name, !price, !category?.label)) {
       setError(true);
       return false;
@@ -45,24 +40,7 @@ const AddProduct = () => {
       userId: userId,
     };
 
-    dispatch(addItem(data,navigate))
-
-    // axios
-    //   .post(BASE_URL + "add-product", data, {
-    //     headers: headerData,
-    //   })
-    //   .then((res) => {
-    //     console.log(res, "response from add api");
-    //     if (res.data) {
-    //       toast.success("Item Added");
-    //     } else {
-    //       toast.error("not found");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err, "err in add api call");
-    //   });
-    // navigate("/");
+    dispatch(addItem(data, navigate));
   };
 
   return (
@@ -87,6 +65,7 @@ const AddProduct = () => {
         <TextField
           size="small"
           variant="outlined"
+          type="number"
           label="Price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
