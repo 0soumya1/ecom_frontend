@@ -11,11 +11,11 @@ import { getItemList } from "../redux/Items/Action";
 import { deleteItem } from "../redux/Items/Action";
 
 const ProductList = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const [itemList1, setItemList1] = useState([]);
   const [itemList2, setItemList2] = useState([]);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const itemList = useSelector((state) => state.itemReducer.itemList);
 
