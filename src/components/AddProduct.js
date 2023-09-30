@@ -25,7 +25,7 @@ const AddProduct = () => {
     setCategory(e);
   };
 
-  const addProduct = async () => {
+  const addProduct = () => {
     if ((!name, !price, !category?.label)) {
       setError(true);
       return false;

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {toast} from "react-hot-toast";
-import { BASE_URL } from "../Const";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 // import CircularProgress from "@mui/material/CircularProgress";
@@ -16,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate(); 
 
   const userList = useSelector((state) => state.userReducer.userList);
-  console.log(userList, "userList");
+  
 
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem("user"));
@@ -25,7 +23,7 @@ const Login = () => {
     }
   }, []);
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     // setLoading(true);
     console.log(email, password);
 
@@ -36,24 +34,6 @@ const Login = () => {
 
     dispatch(loginUser(data,navigate))
 
-    // let result = await fetch(BASE_URL + "login", {
-    //   method: "post",
-    //   body: JSON.stringify({ email, password }),
-    //   headers: { "Content-Type": "application/json" },
-    // });
-    // result = await result.json();
-    // console.log(result);
-    // if (result.auth) {
-    //   localStorage.setItem("user", JSON.stringify(result.user));
-    //   localStorage.setItem("token", JSON.stringify(result.auth));
-    //   setLoading(false);
-    //   toast.success("Login Successful");
-    //   //navigate("/");
-    //   window.location.reload("/")
-    // } else {
-    //   setLoading(false);
-    //   toast.error("please enter correct details");
-    // }
   };
 
   return (

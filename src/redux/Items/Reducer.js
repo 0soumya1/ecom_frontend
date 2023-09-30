@@ -1,6 +1,7 @@
-import { AT_ITEM_LIST, AT_DELETE_ITEM, AT_ADD_ITEM } from "./Action";
+import { AT_ITEM_LIST, AT_ADD_ITEM, AT_DELETE_ITEM, AT_GET_ITEM_BY_ID, AT_UPDATE_ITEM } from "./Action";
 const initialState = {
   itemList: [],
+  itemDetail: [],
 };
 
 const itemReducer = (state = initialState, action) => {
@@ -19,6 +20,19 @@ const itemReducer = (state = initialState, action) => {
       break;
 
     case AT_DELETE_ITEM:
+      state = {
+        ...state,
+      };
+      break;
+
+    case AT_GET_ITEM_BY_ID:
+      state = {
+        ...state,
+        itemDetail: action.payload,
+      };
+      break;
+
+    case AT_UPDATE_ITEM:
       state = {
         ...state,
       };

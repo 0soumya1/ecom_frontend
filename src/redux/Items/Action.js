@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 export const AT_ITEM_LIST = "AT_ITEM_LIST";
 export const AT_ADD_ITEM = "AT_ADD_ITEM";
 export const AT_DELETE_ITEM = "AT_DELETE_ITEM";
+export const AT_GET_ITEM_BY_ID = "AT_GET_ITEM_BY_ID";
 export const AT_UPDATE_ITEM = "AT_UPDATE_ITEM";
 
 const headerData = {
@@ -69,6 +70,27 @@ export const deleteItem = (id) => async (dispatch) => {
     .catch((err) => {
       console.log(err, "api err");
     });
+};
+
+export const getItemDetail = (params) => async (dispatch) => {
+  axios
+  .get(BASE_URL + `product/${params.id}`, {
+    headers: headerData,
+  })
+  .then((res) => {
+    if (res.data) {
+      console.log(res.data, "res data");
+      dispatch({
+        type: AT_GET_ITEM_BY_ID,
+        payload: res?.data,
+      });
+    } else {
+      toast.error("no record found");
+    }
+  })
+  .catch((err) => {
+    console.log(err, "api err");
+  });
 };
 
 export const updateItem = (data, navigate, params) => async (dispatch) => {

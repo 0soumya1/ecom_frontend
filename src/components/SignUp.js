@@ -22,7 +22,7 @@ const SignUp = () => {
     }
   }, []);
 
-  const collectData = async () => {
+  const collectData = () => {
     if ((!name, !email, !password)) {
       setError(true);
       return false;

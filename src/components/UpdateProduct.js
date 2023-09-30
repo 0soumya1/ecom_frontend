@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 import Select from "react-select";
-import { BASE_URL, headerData } from "../Const";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getItemDetail } from "../redux/RootActions";
 import { updateItem } from "../redux/RootActions";
 
 const UpdateProduct = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
 
   const params = useParams();
   const navigate = useNavigate();
+
+  const itemDetail = useSelector((state) => state.itemReducer.itemDetail);
 
   const categoryOptions = [
     { value: "Breakfast", label: "Breakfast" },
@@ -30,56 +30,23 @@ const UpdateProduct = () => {
   };
 
   useEffect(() => {
-    getProductDetails();
+    dispatch(getItemDetail(params));
   }, []);
 
-  const getProductDetails = async () => {
-    console.log(params);
+  useEffect(() => {
+    setName(itemDetail.name);
+    setPrice(itemDetail.price);
+    setCategory({ value: itemDetail.category, label: itemDetail.category });
+  }, [itemDetail]);
 
-    axios
-      .get(BASE_URL + `product/${params.id}`, {
-        headers: headerData,
-      })
-      .then((res) => {
-        if (res.data) {
-          console.log(res.data, "res in get item");
-          setName(res.data.name);
-          setPrice(res.data.price);
-          setCategory({ value: res.data.category, label: res.data.category });
-        } else {
-          toast.error("no record found");
-        }
-      })
-      .catch((err) => {
-        console.log(err, "err in api call");
-      });
-  };
-
-  const updateProduct = async (id) => {
+  const updateProduct = async () => {
     const data = {
       name: name,
       price: price,
       category: category?.label,
     };
 
-  //  dispatch(updateItem(data,id,navigate))
-
-    axios
-      .put(BASE_URL + `product/${params.id}`, data, {
-        headers: headerData,
-      })
-      .then((res) => {
-        console.log(res, "response from api");
-        if (res.data) {
-          toast.success("Item Updated");
-          navigate("/");
-        } else {
-          toast.error("no record found");
-        }
-      })
-      .catch((err) => {
-        console.log(err, "err in api call");
-      });
+    dispatch(updateItem(data, navigate, params));
   };
 
   return (
